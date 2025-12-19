@@ -80,5 +80,18 @@ make test-coverage # Gera relatório de cobertura
 -   `make migrate-fresh`: Reinicia o banco de dados e roda os seeders.
 -   `make routes`: Lista todas as rotas da aplicação.
 -   `make cache-clear`: Limpa todos os caches (config, route, view).
+-   `make lint`: Verifica problemas de estilo de código (Laravel Pint).
+-   `make lint-fix`: Corrige automaticamente problemas de estilo de código.
+-   `make install-hooks`: Instala o Git Hook de `pre-commit` (Lint + Coverage).
+
+## 🛡️ Qualidade de Código
+
+Para garantir que o código sempre siga os padrões de estilo e mantenha a cobertura de testes em 100%, você pode instalar o Git Hook:
+
+```bash
+make install-hooks
+```
+
+Isso impedirá commits que não passem no `make lint` ou que reduzam a cobertura de testes.
 
 ---

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use App\Models\Expense;
@@ -13,7 +15,7 @@ class ExpenseFactory extends Factory
     {
         return [
             'description' => fake()->sentence(3),
-            'amount' => fake()->randomFloat(2, 1, 1000),
+            'amount'      => fake()->randomFloat(2, 1, 1000),
         ];
     }
 }

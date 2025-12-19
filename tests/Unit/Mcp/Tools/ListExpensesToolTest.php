@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit\Mcp\Tools;
 
 use App\Mcp\Tools\ListExpensesTool;
@@ -24,15 +26,15 @@ class ListExpensesToolTest extends TestCase
         // Arrange
         Expense::factory()->create([
             'description' => 'Lunch',
-            'amount' => 25.00,
+            'amount'      => 25.00,
         ]);
 
         Expense::factory()->create([
             'description' => 'Taxi',
-            'amount' => 15.50,
+            'amount'      => 15.50,
         ]);
 
-        $tool = new ListExpensesTool();
+        $tool    = new ListExpensesTool;
         $request = $this->createRequest();
 
         // Act
@@ -47,7 +49,7 @@ class ListExpensesToolTest extends TestCase
     public function it_returns_response_when_no_expenses_exist()
     {
         // Arrange
-        $tool = new ListExpensesTool();
+        $tool    = new ListExpensesTool;
         $request = $this->createRequest();
 
         // Act
@@ -64,10 +66,10 @@ class ListExpensesToolTest extends TestCase
         // Arrange
         Expense::factory()->create([
             'description' => 'Test expense',
-            'amount' => 100.00,
+            'amount'      => 100.00,
         ]);
 
-        $tool = new ListExpensesTool();
+        $tool    = new ListExpensesTool;
         $request = $this->createRequest();
 
         // Act
@@ -84,23 +86,23 @@ class ListExpensesToolTest extends TestCase
         // Arrange
         Expense::factory()->create([
             'description' => 'First',
-            'amount' => 10.00,
-            'created_at' => now()->subDays(2),
+            'amount'      => 10.00,
+            'created_at'  => now()->subDays(2),
         ]);
 
         Expense::factory()->create([
             'description' => 'Second',
-            'amount' => 20.00,
-            'created_at' => now()->subDay(),
+            'amount'      => 20.00,
+            'created_at'  => now()->subDay(),
         ]);
 
         Expense::factory()->create([
             'description' => 'Third',
-            'amount' => 30.00,
-            'created_at' => now(),
+            'amount'      => 30.00,
+            'created_at'  => now(),
         ]);
 
-        $tool = new ListExpensesTool();
+        $tool    = new ListExpensesTool;
         $request = $this->createRequest();
 
         // Act
@@ -108,7 +110,7 @@ class ListExpensesToolTest extends TestCase
 
         // Assert
         $this->assertEquals(3, Expense::count());
-        
+
         $expenses = Expense::all();
         $this->assertEquals('First', $expenses[0]->description);
         $this->assertEquals('Second', $expenses[1]->description);
@@ -121,10 +123,10 @@ class ListExpensesToolTest extends TestCase
         // Arrange
         Expense::factory()->create([
             'description' => 'Complete expense',
-            'amount' => 99.99,
+            'amount'      => 99.99,
         ]);
 
-        $tool = new ListExpensesTool();
+        $tool    = new ListExpensesTool;
         $request = $this->createRequest();
 
         // Act
@@ -145,7 +147,7 @@ class ListExpensesToolTest extends TestCase
         // Arrange
         Expense::factory()->count(50)->create();
 
-        $tool = new ListExpensesTool();
+        $tool    = new ListExpensesTool;
         $request = $this->createRequest();
 
         // Act
@@ -161,7 +163,7 @@ class ListExpensesToolTest extends TestCase
     {
         // Arrange
         Expense::factory()->create();
-        $tool = new ListExpensesTool();
+        $tool    = new ListExpensesTool;
         $request = $this->createRequest();
 
         // Act

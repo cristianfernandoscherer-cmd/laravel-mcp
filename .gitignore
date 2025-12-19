@@ -25,4 +25,5 @@ Thumbs.db
 .editorconfig
 boost.json
 composer.lock
-.claude/*
+.claude
+coverage

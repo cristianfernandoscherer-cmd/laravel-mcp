@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Mcp\Servers;
 
 use App\Mcp\Tools\AddExpenseTool;
@@ -28,7 +30,7 @@ class ExpenseServer extends Server
     /**
      * The tools registered with this MCP server.
      *
-     * @var array<int, class-string<\Laravel\Mcp\Server\Tool>>
+     * @var array<int, class-string<Server\Tool>>
      */
     protected array $tools = [
         AddExpenseTool::class,
@@ -38,7 +40,7 @@ class ExpenseServer extends Server
     /**
      * The resources registered with this MCP server.
      *
-     * @var array<int, class-string<\Laravel\Mcp\Server\Resource>>
+     * @var array<int, class-string<Server\Resource>>
      */
     protected array $resources = [
         //
@@ -47,7 +49,7 @@ class ExpenseServer extends Server
     /**
      * The prompts registered with this MCP server.
      *
-     * @var array<int, class-string<\Laravel\Mcp\Server\Prompt>>
+     * @var array<int, class-string<Server\Prompt>>
      */
     protected array $prompts = [
         //

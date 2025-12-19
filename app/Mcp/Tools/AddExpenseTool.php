@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Mcp\Tools;
 
+use App\Models\Expense;
 use Illuminate\Contracts\JsonSchema\JsonSchema;
 use Laravel\Mcp\Request;
 use Laravel\Mcp\Response;
 use Laravel\Mcp\Server\Tool;
-use App\Models\Expense;
 
 class AddExpenseTool extends Tool
 {
@@ -24,7 +26,7 @@ class AddExpenseTool extends Tool
     {
         $validated = $request->validate([
             'description' => 'required|string',
-            'amount' => 'required|numeric'
+            'amount'      => 'required|numeric',
         ]);
 
         Expense::create($validated);
@@ -37,7 +39,7 @@ class AddExpenseTool extends Tool
     /**
      * Get the tool's input schema.
      *
-     * @return array<string, \Illuminate\Contracts\JsonSchema\JsonSchema>
+     * @return array<string, JsonSchema>
      */
     public function schema(JsonSchema $schema): array
     {

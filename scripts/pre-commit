@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Pre-commit hook to verify linting and test coverage
+
+echo "🔍 Running pre-commit checks..."
+
+# 1. Run Lint
+echo "🎨 Checking code style (Pint)..."
+make lint
+if [ $? -ne 0 ]; then
+    echo "❌ Lint check failed. Run 'make lint-fix' to fix issues."
+    exit 1
+fi
+
+# 2. Run Tests and Check Coverage baseline
+echo "🧪 Running tests and checking coverage threshold..."
+make test-coverage-threshold
+
+if [ $? -ne 0 ]; then
+    echo "❌ Tests failed or coverage decreased. Please fix the issues before committing."
+    exit 1
+fi
+
+echo "✅ All checks passed! Proceeding with commit."
+exit 0

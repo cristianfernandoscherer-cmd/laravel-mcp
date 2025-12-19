@@ -59,3 +59,18 @@ cache-clear: ## Limpa todos os caches
 	docker compose exec laravel php artisan config:clear
 	docker compose exec laravel php artisan route:clear
 	docker compose exec laravel php artisan view:clear
+
+lint: ## Verifica problemas de estilo de código (Laravel Pint)
+	docker compose exec laravel ./vendor/bin/pint --test
+
+lint-fix: ## Corrige automaticamente problemas de estilo de código (Laravel Pint)
+	docker compose exec laravel ./vendor/bin/pint
+
+test-coverage-threshold: ## Roda os testes e verifica se a cobertura não diminuiu
+	docker compose exec laravel vendor/bin/phpunit --coverage-clover storage/app/clover.xml
+	docker compose exec laravel php scripts/check-coverage.php storage/app/clover.xml .coverage_baseline
+
+install-hooks: ## Instala os Git Hooks do projeto
+	cp scripts/pre-commit .git/hooks/pre-commit
+	chmod +x .git/hooks/pre-commit
+	@echo "✅ Git hooks instalados!"

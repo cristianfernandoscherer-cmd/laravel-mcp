@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit\Mcp\Tools;
 
 use App\Mcp\Tools\AddExpenseTool;
@@ -22,10 +24,10 @@ class AddExpenseToolTest extends TestCase
     public function it_can_add_an_expense_with_valid_data()
     {
         // Arrange
-        $tool = new AddExpenseTool();
+        $tool    = new AddExpenseTool;
         $request = $this->createRequest([
             'description' => 'Office supplies',
-            'amount' => 150.50,
+            'amount'      => 150.50,
         ]);
 
         // Act
@@ -34,9 +36,9 @@ class AddExpenseToolTest extends TestCase
         // Assert
         $this->assertDatabaseHas('expenses', [
             'description' => 'Office supplies',
-            'amount' => 150.50,
+            'amount'      => 150.50,
         ]);
-        
+
         // Verify response is a Response object
         $this->assertInstanceOf(\Laravel\Mcp\Response::class, $response);
     }
@@ -45,7 +47,7 @@ class AddExpenseToolTest extends TestCase
     public function it_validates_required_description()
     {
         // Arrange
-        $tool = new AddExpenseTool();
+        $tool    = new AddExpenseTool;
         $request = $this->createRequest([
             'amount' => 100,
         ]);
@@ -59,7 +61,7 @@ class AddExpenseToolTest extends TestCase
     public function it_validates_required_amount()
     {
         // Arrange
-        $tool = new AddExpenseTool();
+        $tool    = new AddExpenseTool;
         $request = $this->createRequest([
             'description' => 'Test expense',
         ]);
@@ -73,10 +75,10 @@ class AddExpenseToolTest extends TestCase
     public function it_validates_amount_is_numeric()
     {
         // Arrange
-        $tool = new AddExpenseTool();
+        $tool    = new AddExpenseTool;
         $request = $this->createRequest([
             'description' => 'Test expense',
-            'amount' => 'not-a-number',
+            'amount'      => 'not-a-number',
         ]);
 
         // Act & Assert
@@ -88,10 +90,10 @@ class AddExpenseToolTest extends TestCase
     public function it_can_add_expense_with_decimal_amount()
     {
         // Arrange
-        $tool = new AddExpenseTool();
+        $tool    = new AddExpenseTool;
         $request = $this->createRequest([
             'description' => 'Coffee',
-            'amount' => 4.99,
+            'amount'      => 4.99,
         ]);
 
         // Act
@@ -100,7 +102,7 @@ class AddExpenseToolTest extends TestCase
         // Assert
         $this->assertDatabaseHas('expenses', [
             'description' => 'Coffee',
-            'amount' => 4.99,
+            'amount'      => 4.99,
         ]);
     }
 
@@ -108,10 +110,10 @@ class AddExpenseToolTest extends TestCase
     public function it_can_add_expense_with_zero_amount()
     {
         // Arrange
-        $tool = new AddExpenseTool();
+        $tool    = new AddExpenseTool;
         $request = $this->createRequest([
             'description' => 'Free item',
-            'amount' => 0,
+            'amount'      => 0,
         ]);
 
         // Act
@@ -120,7 +122,7 @@ class AddExpenseToolTest extends TestCase
         // Assert
         $this->assertDatabaseHas('expenses', [
             'description' => 'Free item',
-            'amount' => 0,
+            'amount'      => 0,
         ]);
     }
 
@@ -128,10 +130,10 @@ class AddExpenseToolTest extends TestCase
     public function it_can_add_expense_with_negative_amount()
     {
         // Arrange
-        $tool = new AddExpenseTool();
+        $tool    = new AddExpenseTool;
         $request = $this->createRequest([
             'description' => 'Refund',
-            'amount' => -50.00,
+            'amount'      => -50.00,
         ]);
 
         // Act
@@ -140,7 +142,7 @@ class AddExpenseToolTest extends TestCase
         // Assert
         $this->assertDatabaseHas('expenses', [
             'description' => 'Refund',
-            'amount' => -50.00,
+            'amount'      => -50.00,
         ]);
     }
 
@@ -148,10 +150,10 @@ class AddExpenseToolTest extends TestCase
     public function it_creates_expense_with_current_date_if_not_provided()
     {
         // Arrange
-        $tool = new AddExpenseTool();
+        $tool    = new AddExpenseTool;
         $request = $this->createRequest([
             'description' => 'Test',
-            'amount' => 100,
+            'amount'      => 100,
         ]);
 
         // Act
