@@ -1,0 +1,13 @@
+.git
+.vscode
+vendor
+node_modules
+storage/*.key
+public/hot
+public/storage
+.env
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log

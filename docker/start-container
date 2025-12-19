@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+if [ ! -z "$WWWGROUP" ]; then
+    usermod -u $WWWGROUP sail
+fi
+
+if [ ! -d /.composer ]; then
+    mkdir /.composer
+fi
+
+chmod -R ugo+rw /.composer
+
+if [ ! -d /var/www/html/vendor ]; then
+    composer install
+fi
+
+# Ensure database exists for SQLite
+if [ ! -f /var/www/html/database/database.sqlite ]; then
+    touch /var/www/html/database/database.sqlite
+fi
+
+# Run migrations
+php artisan migrate --force
+
+if [ $# -gt 0 ]; then
+    exec gosu $WWWUSER "$@"
+else
+    exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
+fi

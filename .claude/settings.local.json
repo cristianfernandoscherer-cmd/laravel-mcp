@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__expense-api__add-expense-tool",
+      "Bash(php artisan:*)"
+    ]
+  }
+}
